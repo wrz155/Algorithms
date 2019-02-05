@@ -1,3 +1,7 @@
+﻿/*
+	时间复杂度O(N^2)，额外空间复杂度O(1)，实现可以做到稳定性
+*/
+
 void swap(int arr[], int i, int j) {
 	int tmp = arr[i];
 	arr[i] = arr[j];

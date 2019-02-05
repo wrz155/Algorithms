@@ -1,30 +1,23 @@
+ï»¿/*
+åº”ç”¨ï¼š
+	æ’åº
+	æ•°ç»„
+	äºŒå‰æ ‘
+	è´ªå¿ƒ
+	...
+*/
+
+
 #include <iostream>
 #include <time.h>
 #include <algorithm>
 using namespace std;
 
-void swap(int arr[], int i, int j) {
-	int tmp = arr[i];
-	arr[i] = arr[j];
-	arr[j] = tmp;
-}
 
-void bubbleSort(int arr[], int len) {
-	if (len < 2) {
-		return;
-	}
-	for (int end = len - 1; end > 0; end--) {
-		for (int i = 0; i < end; i++) {
-			if (arr[i] > arr[i + 1]) {
-				swap(arr, i, i + 1);
-			}
-		}
-	}
-}
 
-/*¶ÔÊıÆ÷*/
+/*å¯¹æ•°å™¨*/
 void comparator(int arr[], int len) {
-	sort(arr, arr + len);			//´ÓĞ¡µ½´óÅÅĞò
+	sort(arr, arr + len);			//ä»å°åˆ°å¤§æ’åº
 }
 
 void printArray(int arr[], int len) {
@@ -34,11 +27,29 @@ void printArray(int arr[], int len) {
 	cout << endl;
 }
 
-void generateRandomArray(int arr[], int len, int maxValue) {	// [-maxValue, maxValue]
+void generateNumber(int arr[], int len, int maxValue) {	// [-maxValue, maxValue]
 	for (int i = 0; i < len; i++) {
-		arr[i] = rand() % (2 * maxValue + 1) - maxValue;		//[a,b]Ëæ»úÕûÊı£¬Ê¹ÓÃ(rand() % (b-a+1))+ a;
+		arr[i] = rand() % (2 * maxValue + 1) - maxValue;		//[a,b]éšæœºæ•´æ•°ï¼Œä½¿ç”¨(rand() % (b-a+1))+ a;
 	}
 }
+
+void generateString(char str[],int len){
+	for (int i = 0; i < len - 1; ++i) {
+		switch ((rand() % 3)) {
+			case 1:	
+				str[i] = 'A' + rand() % 26;		//rand() % 26  äº§ç”Ÿ[0,25]
+				break;		
+			case 2:			
+				str[i] = 'a' + rand() % 26;			
+				break;		
+			default:			
+				str[i] = '0' + rand() % 10;			
+				break;		
+			}	
+		}	
+	str[len - 1] = '\0';
+}
+
 
 int* copyArray(const int arr[], int len) {
 	if (len == 0) {
@@ -51,7 +62,7 @@ int* copyArray(const int arr[], int len) {
 	return cp;
 }
 
-//¶Ô±ÈÁ½¸öÊı×éÊÇ·ñÒ»Ñù
+//å¯¹æ¯”ä¸¤ä¸ªæ•°ç»„æ˜¯å¦ä¸€æ ·
 bool isEqual(const int arr[], const int cp[], int len) {
 	for (int i = 0; i < len; i++) {
 		if (arr[i] != cp[i]) {
@@ -67,11 +78,11 @@ int main()
 	for (int i = 0; i < 100; i++) {
 		int len = rand() % 20 + 1;
 		int *arr = new int[len];
-		generateRandomArray(arr, len, 20);
+		generateNumber(arr, len, 20);
 		int *cp = copyArray(arr, len);
 
 		comparator(arr, len);
-		bubbleSort(cp, len);
+		//Sort(cp, len);
 
 		if (!isEqual(arr, cp, len)) {
 			printArray(arr, len);
