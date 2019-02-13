@@ -31,6 +31,7 @@ void heapInsert(int arr[], int index) {
 		index = (index - 1) / 2;
 	}
 }
+
 void heapify(int arr[], int index, int size) {
 	int left = index * 2 + 1;
 	while (left < size) {
