@@ -37,9 +37,11 @@ ListNode* findKthToTail(ListNode* head, unsigned int k) {
 }
 
 /*
-@ 判断链表是否有环
+@ 判断链表是否有环,如果有环，返回环的入口地址
+@ 要求：1）不允许改变链表结构，2）时间复杂度O(n)，空间复杂度O(1)
+@ 寻找环入口的方法就是采用两个指针，一个从头出发，一个从相遇点出发，一次都只移动一步，当二者相等时便是环入口的位置
 */
-bool isCircle(ListNode* head)
+ListNode* isCircle(ListNode* head)
 { 
 	ListNode* fast = head;
 	ListNode* slow = head;
@@ -47,36 +49,18 @@ bool isCircle(ListNode* head)
 		slow = slow->next;
 		fast = fast->next->next;
 		if (fast == slow) { 
-			return true; 
+			fast = head;
+			while (slow->next != NULL && fast->next != NULL) {
+				slow = slow->next;
+				fast = fast->next;
+				if (fast == slow) {
+					return slow;
+				}
+			}
 		} 
-	}	
-	return false; 
+	}
+	return NULL; 
 }  
-
-/*
-@ 链表环入口
-@ 寻找环入口的方法就是采用两个指针，一个从头出发，一个从相遇点出发，一次都只移动一步，当二者相等时便是环入口的位置
-*/
-ListNode* findCircle(ListNode* head)
-{ 
-	ListNode* fast = head;
-	ListNode* slow = head;
-	while (slow->next != NULL && fast->next->next != NULL) {
-		slow = slow->next;
-		fast = fast->next->next;
-		if (fast == slow) {
-			break;
-		}
-	}
-	fast = head;
-	while (slow->next != NULL && fast->next != NULL) {
-		slow = slow->next;
-		fast = fast->next;
-		if (fast == slow) {
-			return slow;
-		}
-	}
-}
 
 /*
 @ 给定链表的头指针和节点指针，O(1)时间删除该节点
