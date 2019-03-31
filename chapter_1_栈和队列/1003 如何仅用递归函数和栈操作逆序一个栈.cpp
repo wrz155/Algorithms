@@ -1,8 +1,7 @@
 /*
-题目： 
-	一个栈依次压入1、2、3、4、5，那么栈顶到栈底分别为：5、4、3、2、1。 
-	将这个栈逆置后栈顶到栈底分别为1、2、3、4、5。 
-	用递归函数来实现，不能用其他数据结构。
+分步：
+	1、递归实现：将栈底元素移除并返回
+	2、递归实现：逆序一个栈
 */
 
 #include <stack>
@@ -22,12 +21,12 @@ int getAndRemoveLastElement(stack<int> &s) {
 	}
 }
 
-void reverse(stack<int> &s) {
+void reverseStack(stack<int> &s) {
 	if (s.empty()) {
 		return;
 	}
 	int i = getAndRemoveLastElement(s);
-	reverse(s);
+	reverseStack(s);
 	s.push(i);
 }
 
@@ -38,7 +37,7 @@ int main() {
 	test.push(3);
 	test.push(4);
 	test.push(5);
-	reverse(test);
+	reverseStack(test);
 	while (!test.empty()) {
 		int result = test.top();
 		test.pop();

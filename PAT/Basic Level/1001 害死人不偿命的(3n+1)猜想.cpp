@@ -1,4 +1,4 @@
-/*
+﻿/*
 1001. 害死人不偿命的(3n+1)猜想 (15)
 
 卡拉兹(Callatz)猜想：
@@ -23,6 +23,7 @@
 
 #include <iostream>
 using namespace std;
+
 int main() {
 	int n, count = 0;
 	cin >> n;
